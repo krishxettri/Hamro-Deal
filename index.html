@@ -1,23 +1,21 @@
-```html
 <!DOCTYPE html>
 <html lang="ne" class="h-full bg-slate-100">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
-  <title>Hamro Deal - Nepal's #1 Offers & Vouchers Platform</title>
+  <title>Hamro Deal - Verified Deals Nepal</title>
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
   <!-- FontAwesome Icons -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   <style>
-    /* Modern Glassmorphic iOS Styling */
     body {
       font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
       -webkit-tap-highlight-color: transparent;
       overscroll-behavior-y: none;
     }
     .ios-glass {
-      background: rgba(255, 255, 255, 0.85);
+      background: rgba(255, 255, 255, 0.88);
       backdrop-filter: blur(20px) saturate(180%);
       -webkit-backdrop-filter: blur(20px) saturate(180%);
     }
@@ -40,7 +38,7 @@
 </head>
 <body class="flex flex-col h-full max-w-md mx-auto bg-gray-50 text-gray-900 shadow-2xl relative overflow-hidden select-none">
 
-  <!-- ================= TOP NAVIGATION HEADER ================= -->
+  <!-- ================= HEADER ================= -->
   <header class="sticky top-0 z-30 ios-glass border-b border-gray-200/60 px-4 py-3 flex items-center justify-between shadow-2xs">
     <div class="flex items-center gap-2.5 cursor-pointer" onclick="switchTab('deals')">
       <div class="w-9 h-9 rounded-2xl bg-gradient-to-tr from-rose-500 via-rose-600 to-indigo-600 flex items-center justify-center text-white shadow-md shadow-rose-500/20">
@@ -53,13 +51,11 @@
     </div>
 
     <div class="flex items-center gap-2">
-      <!-- Quick Auth / Account State Indicator -->
       <button id="top-auth-btn" onclick="handleTopAuthClick()" class="px-3 py-1.5 rounded-full bg-rose-500 hover:bg-rose-600 text-white text-xs font-black flex items-center gap-1.5 shadow-sm active:scale-95 transition">
         <i class="fa-solid fa-right-to-bracket text-xs"></i>
         <span id="top-auth-btn-label">Login</span>
       </button>
 
-      <!-- Hamburger Drawer Button -->
       <button onclick="toggleDrawer()" class="w-9 h-9 rounded-2xl bg-gray-100 hover:bg-gray-200 flex items-center justify-center text-gray-800 transition">
         <i class="fa-solid fa-bars text-sm"></i>
       </button>
@@ -69,16 +65,15 @@
   <!-- ================= TOAST NOTIFICATION ================= -->
   <div id="toast" class="fixed top-16 left-1/2 -translate-x-1/2 z-50 transition-all duration-300 opacity-0 pointer-events-none w-[90%] max-w-xs"></div>
 
-  <!-- ================= DRAWER MENU ================= -->
+  <!-- ================= CLEAN DRAWER MENU ================= -->
   <div id="drawer-bg" onclick="toggleDrawer()" class="fixed inset-0 z-40 bg-black/40 backdrop-blur-xs opacity-0 pointer-events-none transition-opacity duration-300"></div>
   <aside id="drawer" class="fixed top-0 right-0 bottom-0 z-50 w-72 bg-white/95 backdrop-blur-2xl shadow-2xl p-5 transform translate-x-full transition-transform duration-300 ease-in-out flex flex-col justify-between">
     <div class="space-y-6">
-      <!-- Drawer Profile Summary -->
       <div class="flex justify-between items-center border-b border-gray-100 pb-3">
         <div class="flex items-center gap-2.5">
           <div id="drawer-avatar" class="w-9 h-9 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-black text-sm">G</div>
           <div>
-            <h3 id="drawer-user-name" class="text-xs font-black text-gray-900">Guest Visitor</h3>
+            <h3 id="drawer-user-name" class="text-xs font-black text-gray-900 flex items-center gap-1">Guest Visitor</h3>
             <span id="drawer-user-role" class="text-[9px] font-bold px-2 py-0.5 rounded-full bg-gray-100 text-gray-500 border border-gray-200">Not Logged In</span>
           </div>
         </div>
@@ -87,58 +82,49 @@
         </button>
       </div>
 
-      <!-- Navigation Links -->
       <div class="space-y-2">
-        <p class="text-[10px] font-black uppercase text-gray-400 px-1">Main Menu</p>
+        <p class="text-[10px] font-black uppercase text-gray-400 px-1">Navigation</p>
         <button onclick="navFromDrawer('deals')" class="w-full flex items-center gap-3 p-2.5 rounded-2xl hover:bg-gray-100 text-xs font-bold text-gray-800">
-          <i class="fa-solid fa-fire text-rose-500 w-4"></i> Explore Deals
+          <i class="fa-solid fa-fire text-rose-500 w-4"></i> Browse Deals
         </button>
         <button onclick="navFromDrawer('vouchers')" class="w-full flex items-center gap-3 p-2.5 rounded-2xl hover:bg-gray-100 text-xs font-bold text-gray-800">
           <i class="fa-solid fa-ticket text-indigo-500 w-4"></i> My Vouchers
         </button>
-        <button onclick="navFromDrawer('vendor')" class="w-full flex items-center justify-between p-2.5 rounded-2xl bg-indigo-50 hover:bg-indigo-100 text-xs font-bold text-indigo-900 border border-indigo-100">
-          <span class="flex items-center gap-3"><i class="fa-solid fa-store text-indigo-600 w-4"></i> Vendor Portal</span>
-          <i class="fa-solid fa-chevron-right text-[10px] text-indigo-400"></i>
+        <button onclick="navFromDrawer('explore')" class="w-full flex items-center gap-3 p-2.5 rounded-2xl hover:bg-gray-100 text-xs font-bold text-gray-800">
+          <i class="fa-solid fa-compass text-emerald-500 w-4"></i> Explore Nearby
         </button>
-        <button onclick="navFromDrawer('admin')" class="w-full flex items-center justify-between p-2.5 rounded-2xl bg-red-50 hover:bg-red-100 text-xs font-bold text-red-900 border border-red-100">
-          <span class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-red-600 w-4"></i> Admin Panel</span>
-          <i class="fa-solid fa-chevron-right text-[10px] text-red-400"></i>
-        </button>
+
+        <div id="drawer-role-specific-nav" class="space-y-2 pt-2 border-t border-gray-100 hidden"></div>
       </div>
 
-      <!-- User Account Action in Drawer -->
       <div id="drawer-auth-actions" class="space-y-2 pt-3 border-t border-gray-100">
-        <button onclick="openAuthModal('login')" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-sm">
-          Login / Register Account
+        <button onclick="openAuthModal('Customer', 'login')" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-sm">
+          Login / Sign Up
         </button>
       </div>
     </div>
 
-    <div class="text-center pt-4 border-t border-gray-100 space-y-1">
-      <p class="text-[10px] text-gray-400 font-bold">Hamro Deal Live Web Platform</p>
-      <p class="text-[9px] text-gray-300">Firebase Auth & Firestore Powered</p>
+    <div class="text-center pt-4 border-t border-gray-100">
+      <p class="text-[10px] text-gray-400 font-bold">Hamro Deal Official Platform</p>
     </div>
   </aside>
 
-  <!-- ================= MAIN SCROLLABLE BODY ================= -->
+  <!-- ================= MAIN APP SCREENS ================= -->
   <main class="flex-grow overflow-y-auto hide-scrollbar px-4 pt-3 pb-24 space-y-4">
 
-    <!-- ================= 1. TAB: DEALS (HOMEPAGE - ACCESSIBLE TO ALL) ================= -->
+    <!-- 1. TAB: DEALS (HOMEPAGE) -->
     <section id="tab-deals" class="space-y-4">
-      
-      <!-- Hero Banner -->
       <div class="rounded-3xl bg-gradient-to-r from-rose-500 via-rose-600 to-indigo-600 text-white p-5 shadow-lg relative overflow-hidden">
         <div class="absolute -right-6 -bottom-6 w-32 h-32 bg-white/10 rounded-full blur-xl pointer-events-none"></div>
-        <span class="text-[9px] font-extrabold uppercase bg-white/20 px-2.5 py-0.5 rounded-full backdrop-blur-md">🔥 Today's Top Discouts</span>
-        <h2 class="text-lg font-black leading-tight pt-2">उत्कृष्ट रेस्टुरेन्ट, क्याफे र ग्याजेटमा छुट!</h2>
-        <p class="text-xs text-rose-100 pt-1">नजिकैका स्टोरबाट निःशुल्क भाउचर Claim गर्नुहोस् र पैसा बचत गर्नुहोस्।</p>
+        <span class="text-[9px] font-extrabold uppercase bg-white/20 px-2.5 py-0.5 rounded-full backdrop-blur-md">🔥 Today's Discounts</span>
+        <h2 class="text-lg font-black leading-tight pt-2">रेस्टुरेन्ट र ग्याजेटमा भारी छुट!</h2>
+        <p class="text-xs text-rose-100 pt-1">भाउचर Claim गर्नुहोस् र पसलमा QR Code देखाएर छुट पाउनुहोस्।</p>
       </div>
 
-      <!-- Search & Category Filters -->
       <div class="space-y-2.5">
         <div class="relative">
           <i class="fa-solid fa-magnifying-glass absolute left-3.5 top-3 text-gray-400 text-xs"></i>
-          <input type="text" id="search-input" onkeyup="filterDeals()" placeholder="उदा: Burger, Smartwatch, Spa..." class="w-full bg-white border border-gray-200 rounded-2xl pl-9 pr-4 py-2.5 text-xs font-medium focus:ring-2 focus:ring-rose-500 outline-none shadow-2xs">
+          <input type="text" id="search-input" onkeyup="filterDeals()" placeholder="खोज्नुहोस् (Burger, Earbuds, Spa...)" class="w-full bg-white border border-gray-200 rounded-2xl pl-9 pr-4 py-2.5 text-xs font-medium focus:ring-2 focus:ring-rose-500 outline-none shadow-2xs">
         </div>
 
         <div class="flex gap-1.5 overflow-x-auto hide-scrollbar py-0.5">
@@ -150,101 +136,125 @@
         </div>
       </div>
 
-      <!-- Live Deals Grid Feed -->
       <div id="deals-grid" class="space-y-3.5">
         <div class="p-8 text-center text-gray-400 text-xs font-bold animate-pulse">डिलहरू लोड हुँदैछ...</div>
       </div>
     </section>
 
-    <!-- ================= 2. TAB: MY VOUCHERS ================= -->
+    <!-- 2. TAB: MY VOUCHERS -->
     <section id="tab-vouchers" class="hidden space-y-3.5">
       <div>
         <h2 class="text-lg font-black text-gray-900">My Claimed Vouchers</h2>
-        <p class="text-xs text-gray-500">तपाईंले क्लेम गर्नुभएका भाउचर र QR कोडहरू यहाँ देखिनेछन्।</p>
+        <p class="text-xs text-gray-500">पसलमा देखाउनका लागि तपाईंको सुरक्षित QR कोडहरू।</p>
       </div>
-
-      <!-- Voucher content loaded via JS -->
       <div id="vouchers-list" class="space-y-3">
         <div class="p-8 text-center text-gray-400 text-xs font-bold">लोड हुँदैछ...</div>
       </div>
     </section>
 
-    <!-- ================= 3. TAB: EXPLORE NEARBY ================= -->
+    <!-- 3. TAB: EXPLORE -->
     <section id="tab-explore" class="hidden space-y-4">
       <div>
         <h2 class="text-lg font-black text-gray-900">Nearby Deals & Stores</h2>
         <p class="text-xs text-gray-500">नेपालका प्रमुख शहरहरू र लोकेसन अनुसार</p>
       </div>
-
       <div class="bg-indigo-600 text-white rounded-3xl p-5 space-y-2 shadow-lg">
         <i class="fa-solid fa-map-location-dot text-3xl text-indigo-200"></i>
-        <h3 class="font-extrabold text-sm">GPS Radar Scanner</h3>
-        <p class="text-xs text-indigo-100">तपाईंको क्षेत्र आसपासका सबै ५ किमी भित्रका स्टोरहरू खोज्नुहोस्।</p>
+        <h3 class="font-extrabold text-sm">GPS Location Scanner</h3>
+        <p class="text-xs text-indigo-100">५ किमी आसपासका सबै पार्टनर स्टोरहरू पत्ता लगाउनुहोस्।</p>
         <button onclick="scanGPS()" class="bg-white text-indigo-600 font-extrabold text-xs px-4 py-2.5 rounded-xl shadow-sm mt-1 active:scale-95 transition">
-          Scan Location Deals
+          Scan Deals
         </button>
       </div>
     </section>
 
-    <!-- ================= 4. TAB: USER PROFILE ================= -->
+    <!-- 4. TAB: PROFILE -->
     <section id="tab-profile" class="hidden space-y-4">
-      <div id="profile-card" class="bg-white rounded-3xl p-5 border border-gray-200 shadow-sm text-center space-y-3">
-        <!-- Profile info generated dynamically -->
-      </div>
+      <div id="profile-card" class="bg-white rounded-3xl p-5 border border-gray-200 shadow-sm text-center space-y-3"></div>
     </section>
 
-    <!-- ================= 5. VENDOR PORTAL ================= -->
+    <!-- 5. VENDOR PORTAL (POST DEALS WITH PHOTO + SHOP KYC) -->
     <section id="tab-vendor" class="hidden space-y-4">
       <div class="flex justify-between items-center">
-        <h2 class="text-lg font-black text-gray-900">Vendor Portal</h2>
-        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-indigo-50 text-indigo-600 border border-indigo-200">Store Partner</span>
+        <div>
+          <h2 class="text-lg font-black text-gray-900 flex items-center gap-1.5" id="vendor-store-heading">
+            Vendor Dashboard
+          </h2>
+          <p class="text-[10px] text-gray-400" id="vendor-kyc-status-text">KYC Status: Not Verified</p>
+        </div>
+        <span id="vendor-kyc-badge" class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-yellow-50 text-yellow-700 border border-yellow-200">
+          KYC Pending
+        </span>
       </div>
 
-      <!-- Add New Deal -->
-      <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-3">
-        <h3 class="text-xs font-black text-gray-900 flex items-center gap-1.5">
-          <i class="fa-solid fa-plus-circle text-rose-500"></i> Post New Offer / Deal
+      <!-- KYC SUBMISSION SECTION (IF NOT APPROVED) -->
+      <div id="vendor-kyc-box" class="bg-white rounded-3xl p-4 border border-indigo-100 shadow-xs space-y-3">
+        <h3 class="text-xs font-black text-indigo-900 flex items-center gap-1.5">
+          <i class="fa-solid fa-id-card text-indigo-600"></i> Shop KYC Verification (Get Blue Tick ✔)
         </h3>
-
-        <form onsubmit="postNewDeal(event)" class="space-y-3">
+        <p class="text-[11px] text-gray-500">ब्लु टिक प्रमाणीकरण पाउनका लागि प्यान नम्बर र परिचयपत्र अपलोड गर्नुहोस्।</p>
+        <form onsubmit="submitVendorKYC(event)" class="space-y-2.5">
           <div>
-            <label class="block text-[10px] font-bold text-gray-500 mb-1">Deal Title *</label>
-            <input type="text" id="post-title" required placeholder="उदा: 30% Off on Momo Combo" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-rose-500">
-          </div>
-          <div>
-            <label class="block text-[10px] font-bold text-gray-500 mb-1">Store / Shop Name *</label>
-            <input type="text" id="post-shop" required placeholder="उदा: Delicious Momo Hub" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
-          </div>
-          <div class="grid grid-cols-2 gap-2">
-            <div>
-              <label class="block text-[10px] font-bold text-gray-500 mb-1">Discount Price *</label>
-              <input type="text" id="post-price" required placeholder="Rs. 250" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
-            </div>
-            <div>
-              <label class="block text-[10px] font-bold text-gray-500 mb-1">Original Price</label>
-              <input type="text" id="post-orig-price" placeholder="Rs. 350" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
-            </div>
+            <label class="block text-[10px] font-bold text-gray-500 mb-1">PAN / Reg Number *</label>
+            <input type="text" id="kyc-pan" required placeholder="उदा: 601234567" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2 text-xs font-bold outline-none">
           </div>
           <div>
-            <label class="block text-[10px] font-bold text-gray-500 mb-1">Category</label>
-            <select id="post-cat" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
-              <option value="Food">Food & Dining</option>
-              <option value="Electronics">Electronics</option>
-              <option value="Fashion">Fashion</option>
-              <option value="Services">Services</option>
-            </select>
+            <label class="block text-[10px] font-bold text-gray-500 mb-1">Passport / Citizenship / PAN Card Photo *</label>
+            <input type="file" id="kyc-doc-file" accept="image/*" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-1.5 text-[11px] outline-none">
           </div>
-          <div>
-            <label class="block text-[10px] font-bold text-gray-500 mb-1">Store Location</label>
-            <input type="text" id="post-loc" required placeholder="उदा: Thamel, Kathmandu" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
-          </div>
-          <button type="submit" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-2.5 rounded-xl text-xs shadow-md transition active:scale-95">
-            Publish Deal to Platform
+          <button type="submit" class="w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-2 rounded-xl text-xs shadow-md transition">
+            Submit KYC for Approval
           </button>
         </form>
       </div>
 
-      <!-- Redeem Voucher -->
+      <!-- POST NEW DEAL WITH PHOTO -->
+      <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-3">
+        <h3 class="text-xs font-black text-gray-900 flex items-center gap-1.5">
+          <i class="fa-solid fa-plus-circle text-rose-500"></i> Post New Store Deal
+        </h3>
+        <form onsubmit="postNewDeal(event)" class="space-y-3">
+          <div>
+            <label class="block text-[10px] font-bold text-gray-500 mb-1">Deal Title *</label>
+            <input type="text" id="post-title" required placeholder="उदा: 30% Off on Special Burger" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none focus:ring-2 focus:ring-rose-500">
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] font-bold text-gray-500 mb-1">Discount Price *</label>
+              <input type="text" id="post-price" required placeholder="Rs. 350" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-gray-500 mb-1">Original Price</label>
+              <input type="text" id="post-orig-price" placeholder="Rs. 500" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
+            </div>
+          </div>
+          <div class="grid grid-cols-2 gap-2">
+            <div>
+              <label class="block text-[10px] font-bold text-gray-500 mb-1">Category</label>
+              <select id="post-cat" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
+                <option value="Food">Food & Dining</option>
+                <option value="Electronics">Electronics</option>
+                <option value="Fashion">Fashion</option>
+                <option value="Services">Services</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-[10px] font-bold text-gray-500 mb-1">Store Location</label>
+              <input type="text" id="post-loc" required placeholder="Kathmandu" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-medium outline-none">
+            </div>
+          </div>
+          <!-- Photo Upload Input -->
+          <div>
+            <label class="block text-[10px] font-bold text-gray-500 mb-1">Deal Image (ग्यालरीबाट फोटो छान्नुहोस्) *</label>
+            <input type="file" id="post-photo-file" accept="image/*" required class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2 text-xs outline-none">
+          </div>
+          <button type="submit" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-2.5 rounded-xl text-xs shadow-md transition active:scale-95">
+            Publish Deal to Live Feed
+          </button>
+        </form>
+      </div>
+
+      <!-- REDEEM CUSTOMER VOUCHER -->
       <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-2.5">
         <h3 class="text-xs font-black text-gray-900 flex items-center gap-1.5">
           <i class="fa-solid fa-qrcode text-indigo-600"></i> Redeem Customer Voucher
@@ -258,48 +268,84 @@
       </div>
     </section>
 
-    <!-- ================= 6. SUPER ADMIN PORTAL ================= -->
+    <!-- 6. SUPER ADMIN CONTROL PANEL (MANAGE DEALS & KYC APPROVAL) -->
     <section id="tab-admin" class="hidden space-y-4">
       <div class="flex justify-between items-center">
-        <h2 class="text-lg font-black text-gray-900">Admin Control Panel</h2>
-        <span class="text-[10px] font-bold px-2.5 py-1 rounded-full bg-red-50 text-red-600 border border-red-200">Super Admin</span>
+        <div>
+          <h2 class="text-lg font-black text-gray-900">Admin Control Panel</h2>
+          <p class="text-[10px] text-gray-400">Master Owner Access</p>
+        </div>
+        <span class="text-[10px] font-black px-2.5 py-1 rounded-full bg-red-600 text-white shadow-sm flex items-center gap-1">
+          <i class="fa-solid fa-shield-check"></i> Super Admin
+        </span>
       </div>
 
+      <!-- VENDOR KYC APPROVAL REQUESTS -->
       <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-3">
-        <h3 class="text-xs font-black text-gray-800">Manage All Published Deals</h3>
+        <h3 class="text-xs font-black text-gray-900 flex items-center gap-1.5">
+          <i class="fa-solid fa-certificate text-indigo-600"></i> Pending Vendor KYCs (Grant Blue Tick)
+        </h3>
+        <div id="admin-kyc-list" class="space-y-2">
+          <div class="text-[11px] text-gray-400">Loading pending KYCs...</div>
+        </div>
+      </div>
+
+      <!-- MANAGE LIVE DEALS (DELETE) -->
+      <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-3">
+        <h3 class="text-xs font-black text-gray-800 flex items-center gap-1.5">
+          <i class="fa-solid fa-trash-can text-red-500"></i> Manage & Delete Live Deals
+        </h3>
         <div id="admin-deals-list" class="space-y-2">
-          <div class="text-[11px] text-gray-400">Loading live deals...</div>
+          <div class="text-[11px] text-gray-400">Loading deals...</div>
         </div>
       </div>
     </section>
 
   </main>
 
-  <!-- ================= AUTHENTICATION MODAL (LOGIN / REGISTER) ================= -->
+  <!-- ================= AUTH MODAL WITH EMAIL OTP VERIFICATION ================= -->
   <div id="auth-modal" class="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-4 opacity-0 pointer-events-none transition-all duration-300">
     <div class="bg-white rounded-3xl w-full max-w-sm p-6 space-y-4 shadow-2xl transform scale-95 transition-transform duration-300" id="auth-modal-box">
       
       <div class="flex justify-between items-center">
         <div>
-          <h3 id="auth-modal-title" class="text-base font-black text-gray-900">Login to Hamro Deal</h3>
-          <p id="auth-modal-sub" class="text-[11px] text-gray-400 font-medium">भाउचर दाबी गर्न वा अफर पोस्ट गर्न लगइन गर्नुहोस्।</p>
+          <h3 id="auth-modal-title" class="text-base font-black text-gray-900">Secure Verification Login</h3>
+          <p id="auth-modal-sub" class="text-[11px] text-gray-400 font-medium">खाताको प्रकार छान्नुहोस् र OTP मार्फत अघि बढ्नुहोस्।</p>
         </div>
         <button onclick="closeAuthModal()" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs hover:bg-gray-200">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <!-- Auth Tabs: Login vs Sign Up -->
-      <div class="flex bg-gray-100 p-1 rounded-2xl text-xs font-bold">
-        <button id="auth-tab-login" onclick="setAuthMode('login')" class="flex-1 py-2 rounded-xl bg-white shadow-2xs text-gray-900 text-center">Login</button>
-        <button id="auth-tab-signup" onclick="setAuthMode('signup')" class="flex-1 py-2 rounded-xl text-gray-500 text-center">Create Account</button>
+      <!-- ROLE SELECTOR -->
+      <div id="auth-role-tabs" class="grid grid-cols-3 bg-gray-100 p-1 rounded-2xl text-[11px] font-bold text-center gap-1">
+        <button id="role-tab-Customer" onclick="selectAuthRole('Customer')" class="py-2 rounded-xl bg-white shadow-2xs text-rose-600 font-extrabold">
+          <i class="fa-solid fa-user block text-xs mb-0.5"></i> Customer
+        </button>
+        <button id="role-tab-Vendor" onclick="selectAuthRole('Vendor')" class="py-2 rounded-xl text-gray-500">
+          <i class="fa-solid fa-store block text-xs mb-0.5"></i> Vendor
+        </button>
+        <button id="role-tab-Admin" onclick="selectAuthRole('Admin')" class="py-2 rounded-xl text-gray-500">
+          <i class="fa-solid fa-shield-halved block text-xs mb-0.5"></i> Admin
+        </button>
       </div>
 
-      <form onsubmit="handleAuthSubmit(event)" class="space-y-3">
-        <!-- Full Name (Only for Sign Up) -->
+      <!-- AUTH MODE TOGGLE -->
+      <div id="auth-mode-toggle-bar" class="flex bg-gray-50 border border-gray-200 p-1 rounded-xl text-xs font-bold">
+        <button id="auth-tab-login" onclick="setAuthMode('login')" class="flex-1 py-1.5 rounded-lg bg-white shadow-2xs text-gray-900 text-center">Login</button>
+        <button id="auth-tab-signup" onclick="setAuthMode('signup')" class="flex-1 py-1.5 rounded-lg text-gray-500 text-center">Sign Up</button>
+      </div>
+
+      <!-- STAGE 1: CREDENTIALS FORM -->
+      <form id="auth-stage-1" onsubmit="handleRequestOTP(event)" class="space-y-3">
         <div id="auth-name-container" class="hidden">
           <label class="block text-[10px] font-bold text-gray-500 mb-1">Full Name *</label>
-          <input type="text" id="auth-name" placeholder="उदा: Suman Sharma" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-rose-500">
+          <input type="text" id="auth-name" placeholder="उदा: Krrish Bastola" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-rose-500">
+        </div>
+
+        <div id="auth-store-container" class="hidden">
+          <label class="block text-[10px] font-bold text-gray-500 mb-1">Shop / Business Name *</label>
+          <input type="text" id="auth-store-name" placeholder="उदा: Himalayan Cafe" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-2.5 text-xs font-bold outline-none focus:ring-2 focus:ring-indigo-500">
         </div>
 
         <div>
@@ -313,28 +359,50 @@
         </div>
 
         <button type="submit" id="auth-submit-btn" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg shadow-rose-500/20 active:scale-95 transition">
-          Sign In
+          Send Verification Code (OTP)
+        </button>
+      </form>
+
+      <!-- STAGE 2: 6-DIGIT EMAIL OTP VERIFICATION -->
+      <form id="auth-stage-2" onsubmit="handleVerifyOTP(event)" class="space-y-3 hidden">
+        <div class="bg-amber-50 border border-amber-200 p-3 rounded-2xl text-center space-y-1">
+          <i class="fa-solid fa-envelope-circle-check text-amber-600 text-xl"></i>
+          <p class="text-xs font-bold text-amber-900">Email Verification Code Sent</p>
+          <p class="text-[10px] text-amber-700 font-medium" id="otp-destination-hint">६-अंकको कोड तपाईंको इमेलमा पठाइयो।</p>
+        </div>
+
+        <div>
+          <label class="block text-[10px] font-bold text-gray-500 mb-1">Enter 6-Digit OTP Code *</label>
+          <input type="text" id="auth-otp-input" maxlength="6" required placeholder="123456" class="w-full bg-gray-50 border border-gray-200 rounded-xl p-3 text-center text-lg font-mono font-black tracking-widest outline-none focus:ring-2 focus:ring-rose-500">
+        </div>
+
+        <button type="submit" class="w-full bg-emerald-600 hover:bg-emerald-700 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg transition active:scale-95">
+          Verify OTP & Enter App
+        </button>
+
+        <button type="button" onclick="resetToStage1()" class="w-full text-center text-xs text-gray-500 font-bold hover:underline">
+          Back / Change Email
         </button>
       </form>
 
     </div>
   </div>
 
-  <!-- ================= DEAL DETAIL POPUP MODAL ================= -->
+  <!-- ================= DEAL DETAIL POPUP ================= -->
   <div id="deal-modal" class="fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex items-end justify-center opacity-0 pointer-events-none transition-all duration-300">
     <div class="bg-white rounded-t-3xl w-full max-w-md p-5 space-y-4 shadow-2xl transform translate-y-full transition-transform duration-300" id="modal-box">
       <div class="flex justify-between items-start">
         <div>
           <span id="modal-cat" class="text-[9px] font-extrabold uppercase px-2.5 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200">Category</span>
           <h3 id="modal-title" class="text-base font-black text-gray-900 pt-1 leading-snug">Deal Title</h3>
-          <p id="modal-shop" class="text-xs text-gray-500 font-bold">Shop Name</p>
+          <p id="modal-shop" class="text-xs text-gray-500 font-bold flex items-center gap-1">Shop Name</p>
         </div>
         <button onclick="closeDealModal()" class="w-8 h-8 rounded-full bg-gray-100 text-gray-500 flex items-center justify-center text-xs">
           <i class="fa-solid fa-xmark"></i>
         </button>
       </div>
 
-      <img id="modal-img" src="" class="w-full h-44 object-cover rounded-2xl border border-gray-100">
+      <img id="modal-img" src="" class="w-full h-48 object-cover rounded-2xl border border-gray-100 shadow-inner">
 
       <div class="space-y-2">
         <div class="flex items-center justify-between">
@@ -347,40 +415,36 @@
             <i class="fa-solid fa-location-dot text-rose-500"></i> <span id="modal-loc">Location</span>
           </span>
         </div>
-        <p id="modal-desc" class="text-xs text-gray-600 leading-relaxed bg-gray-50 p-3 rounded-2xl">Special discount offer for Hamro Deal users.</p>
       </div>
 
-      <button id="btn-claim-modal" onclick="" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg shadow-rose-500/20 active:scale-95 transition flex items-center justify-center gap-2">
+      <button id="btn-claim-modal" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg shadow-rose-500/20 active:scale-95 transition flex items-center justify-center gap-2">
         <i class="fa-solid fa-ticket"></i>
-        <span>Claim Free Voucher Now</span>
+        <span>Claim Free Voucher (Generate QR)</span>
       </button>
     </div>
   </div>
 
-  <!-- ================= BOTTOM TAB BAR ================= -->
+  <!-- ================= BOTTOM TAB NAVIGATION ================= -->
   <nav class="fixed bottom-3 left-4 right-4 z-30 ios-glass border border-gray-200/80 rounded-3xl py-2 px-3 flex justify-around items-center max-w-md mx-auto shadow-xl">
     <button onclick="switchTab('deals')" id="tab-btn-deals" class="flex flex-col items-center gap-0.5 text-gray-400 tab-active transition active:scale-95">
       <i class="fa-solid fa-bag-shopping text-base"></i>
       <span class="text-[10px] font-bold">Deals</span>
     </button>
-
     <button onclick="switchTab('vouchers')" id="tab-btn-vouchers" class="flex flex-col items-center gap-0.5 text-gray-400 transition active:scale-95 relative">
       <i class="fa-solid fa-ticket text-base"></i>
       <span class="text-[10px] font-bold">Vouchers</span>
     </button>
-
     <button onclick="switchTab('explore')" id="tab-btn-explore" class="flex flex-col items-center gap-0.5 text-gray-400 transition active:scale-95">
       <i class="fa-solid fa-compass text-base"></i>
       <span class="text-[10px] font-bold">Explore</span>
     </button>
-
     <button onclick="switchTab('profile')" id="tab-btn-profile" class="flex flex-col items-center gap-0.5 text-gray-400 transition active:scale-95">
       <i class="fa-solid fa-user text-base"></i>
       <span class="text-[10px] font-bold">Profile</span>
     </button>
   </nav>
 
-  <!-- ================= FIREBASE AUTH & FIRESTORE JS SCRIPT ================= -->
+  <!-- ================= FIREBASE APPLICATION LOGIC ================= -->
   <script type="module">
     import { initializeApp } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js";
     import { 
@@ -395,15 +459,14 @@
       getFirestore, 
       collection, 
       doc, 
+      setDoc,
+      getDoc,
       addDoc, 
       onSnapshot, 
       updateDoc, 
-      deleteDoc,
-      query,
-      where 
+      deleteDoc 
     } from "https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js";
 
-    // Firebase Config
     const firebaseConfig = {
       apiKey: "AIzaSyCsVDLOyi6AU6HfYebpWCJJuOE6NUa1NSs",
       authDomain: "hamro-deal-db32b.firebaseapp.com",
@@ -417,30 +480,58 @@
     const auth = getAuth(app);
     const db = getFirestore(app);
 
+    const ADMIN_EMAIL = "krrishbastola@gmail.com";
+
     window.auth = auth;
     window.db = db;
     window.currentUser = null;
-    window.authMode = 'login'; // 'login' or 'signup'
+    window.userRole = 'Guest';
+    window.userProfileData = null;
+    window.selectedAuthRole = 'Customer';
+    window.authMode = 'login';
+    window.generatedOTP = null;
+    window.pendingAuthPayload = null;
     window.liveDeals = [];
     window.liveVouchers = [];
+    window.liveKYCs = [];
     window.activeCategory = 'All';
 
     const dealsCol = collection(db, 'deals');
     const vouchersCol = collection(db, 'vouchers');
+    const usersCol = collection(db, 'users');
+    const kycCol = collection(db, 'kyc_requests');
 
-    // Auth State Observer - Controls REAL Authentication
-    onAuthStateChanged(auth, (user) => {
+    onAuthStateChanged(auth, async (user) => {
       window.currentUser = user;
-      updateUIAuthHeader(user);
-      renderProfileScreen(user);
 
       if (user) {
+        if (user.email.toLowerCase() === ADMIN_EMAIL.toLowerCase()) {
+          window.userRole = 'Admin';
+          window.userProfileData = { name: "Krrish (Master Admin)", role: "Admin", email: user.email };
+        } else {
+          try {
+            const userDoc = await getDoc(doc(db, 'users', user.uid));
+            if (userDoc.exists()) {
+              window.userProfileData = userDoc.data();
+              window.userRole = window.userProfileData.role || 'Customer';
+            } else {
+              window.userRole = 'Customer';
+            }
+          } catch(e) {
+            window.userRole = 'Customer';
+          }
+        }
         setupRealtimeDataSync(user);
       } else {
-        // Load deals publicly for guests
+        window.userRole = 'Guest';
+        window.userProfileData = null;
         setupPublicDealsSync();
         renderVouchersList();
       }
+
+      updateUIAuthHeader(user);
+      renderProfileScreen(user);
+      updateRoleSpecificNavigation();
     });
 
     function updateUIAuthHeader(user) {
@@ -451,13 +542,28 @@
       const drawerAuthActions = document.getElementById('drawer-auth-actions');
 
       if (user) {
-        const name = user.displayName || user.email.split('@')[0];
+        const name = (window.userProfileData && window.userProfileData.name) || user.displayName || user.email.split('@')[0];
         btnLabel.innerText = name.substring(0, 10);
-        drawerName.innerText = name;
-        drawerRole.innerText = "Verified Member";
-        drawerRole.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200";
+        
+        // Add Blue Tick if Verified
+        const isVerified = window.userProfileData?.kycStatus === 'Approved';
+        drawerName.innerHTML = `${name} ${isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 text-xs ml-0.5"></i>' : ''}`;
+
+        if (window.userRole === 'Admin') {
+          drawerRole.innerText = "👑 Master Admin";
+          drawerRole.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-red-100 text-red-600 border border-red-300";
+          drawerAvatar.className = "w-9 h-9 rounded-full bg-red-600 text-white flex items-center justify-center font-black text-sm";
+        } else if (window.userRole === 'Vendor') {
+          drawerRole.innerText = `🏪 ${window.userProfileData?.storeName || 'Vendor'}`;
+          drawerRole.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-indigo-100 text-indigo-600 border border-indigo-300";
+          drawerAvatar.className = "w-9 h-9 rounded-full bg-indigo-600 text-white flex items-center justify-center font-black text-sm";
+        } else {
+          drawerRole.innerText = "🛍️ Customer";
+          drawerRole.className = "text-[9px] font-bold px-2 py-0.5 rounded-full bg-rose-50 text-rose-600 border border-rose-200";
+          drawerAvatar.className = "w-9 h-9 rounded-full bg-rose-500 text-white flex items-center justify-center font-black text-sm";
+        }
+
         drawerAvatar.innerText = name.charAt(0).toUpperCase();
-        drawerAvatar.className = "w-9 h-9 rounded-full bg-rose-500 text-white flex items-center justify-center font-black text-sm";
 
         drawerAuthActions.innerHTML = `
           <button onclick="handleLogout()" class="w-full bg-gray-100 hover:bg-gray-200 text-gray-800 font-extrabold py-2.5 rounded-xl text-xs transition border border-gray-200 flex items-center justify-center gap-2">
@@ -473,29 +579,296 @@
         drawerAvatar.className = "w-9 h-9 rounded-full bg-gray-200 text-gray-600 flex items-center justify-center font-black text-sm";
 
         drawerAuthActions.innerHTML = `
-          <button onclick="openAuthModal('login')" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-sm">
-            Login / Register Account
+          <button onclick="openAuthModal('Customer', 'login')" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-2.5 rounded-xl text-xs transition shadow-sm">
+            Login / Sign Up
           </button>
         `;
       }
     }
 
+    function updateRoleSpecificNavigation() {
+      const container = document.getElementById('drawer-role-specific-nav');
+      if (!window.currentUser) {
+        container.innerHTML = '';
+        container.classList.add('hidden');
+        return;
+      }
+
+      if (window.userRole === 'Vendor') {
+        container.classList.remove('hidden');
+        container.innerHTML = `
+          <p class="text-[10px] font-black uppercase text-indigo-500 px-1">Vendor Space</p>
+          <button onclick="navFromDrawer('vendor')" class="w-full flex items-center justify-between p-2.5 rounded-2xl bg-indigo-50 hover:bg-indigo-100 text-xs font-bold text-indigo-900 border border-indigo-100">
+            <span class="flex items-center gap-3"><i class="fa-solid fa-store text-indigo-600 w-4"></i> Vendor Dashboard</span>
+            <i class="fa-solid fa-chevron-right text-[10px] text-indigo-400"></i>
+          </button>
+        `;
+
+        const isVerified = window.userProfileData?.kycStatus === 'Approved';
+        document.getElementById('vendor-store-heading').innerHTML = `${window.userProfileData?.storeName || 'My Store'} ${isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 text-sm ml-1" title="Verified Blue Tick"></i>' : ''}`;
+        
+        const badge = document.getElementById('vendor-kyc-badge');
+        const kycStatusText = document.getElementById('vendor-kyc-status-text');
+        const kycBox = document.getElementById('vendor-kyc-box');
+
+        if (isVerified) {
+          badge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-blue-50 text-blue-600 border border-blue-200 flex items-center gap-1";
+          badge.innerHTML = `<i class="fa-solid fa-circle-check"></i> Blue Tick Verified`;
+          kycStatusText.innerText = "KYC Status: Approved ✔";
+          kycBox.classList.add('hidden');
+        } else if (window.userProfileData?.kycStatus === 'Submitted') {
+          badge.className = "text-[10px] font-bold px-2.5 py-1 rounded-full bg-amber-50 text-amber-700 border border-amber-200";
+          badge.innerText = "Under Review";
+          kycStatusText.innerText = "KYC Status: Pending Admin Review";
+          kycBox.classList.add('hidden');
+        }
+      } else if (window.userRole === 'Admin') {
+        container.classList.remove('hidden');
+        container.innerHTML = `
+          <p class="text-[10px] font-black uppercase text-red-500 px-1">Admin Panel</p>
+          <button onclick="navFromDrawer('admin')" class="w-full flex items-center justify-between p-2.5 rounded-2xl bg-red-50 hover:bg-red-100 text-xs font-bold text-red-900 border border-red-100">
+            <span class="flex items-center gap-3"><i class="fa-solid fa-shield-halved text-red-600 w-4"></i> Admin Control</span>
+            <i class="fa-solid fa-chevron-right text-[10px] text-red-400"></i>
+          </button>
+        `;
+      } else {
+        container.innerHTML = '';
+        container.classList.add('hidden');
+      }
+    }
+
+    // ================= EMAIL OTP FLOW =================
+    window.selectAuthRole = function(role) {
+      window.selectedAuthRole = role;
+      ['Customer', 'Vendor', 'Admin'].forEach(r => {
+        const btn = document.getElementById(`role-tab-${r}`);
+        btn.className = (r === role) 
+          ? `py-2 rounded-xl bg-white shadow-2xs font-extrabold ${r === 'Admin' ? 'text-red-600' : (r === 'Vendor' ? 'text-indigo-600' : 'text-rose-600')}`
+          : "py-2 rounded-xl text-gray-500";
+      });
+
+      const modeToggle = document.getElementById('auth-mode-toggle-bar');
+      const storeContainer = document.getElementById('auth-store-container');
+      const submitBtn = document.getElementById('auth-submit-btn');
+
+      if (role === 'Admin') {
+        modeToggle.classList.add('hidden');
+        window.authMode = 'login';
+        storeContainer.classList.add('hidden');
+        document.getElementById('auth-name-container').classList.add('hidden');
+        submitBtn.innerText = "Send Admin Verification OTP";
+        submitBtn.className = "w-full bg-red-600 hover:bg-red-700 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg transition";
+      } else if (role === 'Vendor') {
+        modeToggle.classList.remove('hidden');
+        submitBtn.className = "w-full bg-indigo-600 hover:bg-indigo-700 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg transition";
+        window.setAuthMode(window.authMode);
+      } else {
+        modeToggle.classList.remove('hidden');
+        submitBtn.className = "w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-3 rounded-2xl text-xs shadow-lg transition";
+        window.setAuthMode(window.authMode);
+      }
+    };
+
+    window.setAuthMode = function(mode) {
+      window.authMode = mode;
+      const tabLogin = document.getElementById('auth-tab-login');
+      const tabSignup = document.getElementById('auth-tab-signup');
+      const nameContainer = document.getElementById('auth-name-container');
+      const storeContainer = document.getElementById('auth-store-container');
+      const submitBtn = document.getElementById('auth-submit-btn');
+
+      if (mode === 'signup') {
+        tabSignup.className = "flex-1 py-1.5 rounded-lg bg-white shadow-2xs text-gray-900 text-center font-bold";
+        tabLogin.className = "flex-1 py-1.5 rounded-lg text-gray-500 text-center font-bold";
+        nameContainer.classList.remove('hidden');
+
+        if (window.selectedAuthRole === 'Vendor') {
+          storeContainer.classList.remove('hidden');
+          submitBtn.innerText = "Send Vendor Registration OTP";
+        } else {
+          storeContainer.classList.add('hidden');
+          submitBtn.innerText = "Send Customer Registration OTP";
+        }
+      } else {
+        tabLogin.className = "flex-1 py-1.5 rounded-lg bg-white shadow-2xs text-gray-900 text-center font-bold";
+        tabSignup.className = "flex-1 py-1.5 rounded-lg text-gray-500 text-center font-bold";
+        nameContainer.classList.add('hidden');
+        storeContainer.classList.add('hidden');
+        submitBtn.innerText = "Send Login Verification OTP";
+      }
+    };
+
+    window.handleRequestOTP = function(e) {
+      e.preventDefault();
+      const email = document.getElementById('auth-email').value.trim();
+      const password = document.getElementById('auth-password').value;
+      const name = document.getElementById('auth-name').value.trim();
+      const storeName = document.getElementById('auth-store-name').value.trim();
+
+      if (window.selectedAuthRole === 'Admin' && email.toLowerCase() !== ADMIN_EMAIL.toLowerCase()) {
+        return window.showToast("यो Admin Email होइन!", "error");
+      }
+
+      // Generate 6-Digit OTP Code
+      const otp = Math.floor(100000 + Math.random() * 900000).toString();
+      window.generatedOTP = otp;
+      window.pendingAuthPayload = { email, password, name, storeName, role: window.selectedAuthRole, mode: window.authMode };
+
+      // Dispatch UI to Stage 2
+      document.getElementById('auth-stage-1').classList.add('hidden');
+      document.getElementById('auth-role-tabs').classList.add('hidden');
+      document.getElementById('auth-mode-toggle-bar').classList.add('hidden');
+      document.getElementById('auth-stage-2').classList.remove('hidden');
+      document.getElementById('otp-destination-hint').innerText = `${email} मा ६-अंकको कोड पठाइयो।`;
+
+      // Live Alert simulating Email Delivery
+      alert(`[Email Verification Simulation]\n\nTo: ${email}\nYour Hamro Deal 6-Digit OTP is: ${otp}`);
+      window.showToast(`OTP Code sent to ${email}`, "success");
+    };
+
+    window.handleVerifyOTP = async function(e) {
+      e.preventDefault();
+      const inputOTP = document.getElementById('auth-otp-input').value.trim();
+
+      if (inputOTP !== window.generatedOTP) {
+        return window.showToast("गलत OTP कोड! पुनः प्रयास गर्नुहोस्।", "error");
+      }
+
+      const { email, password, name, storeName, role, mode } = window.pendingAuthPayload;
+
+      try {
+        if (mode === 'signup') {
+          const res = await createUserWithEmailAndPassword(auth, email, password);
+          if (name && res.user) await updateProfile(res.user, { displayName: name });
+
+          await setDoc(doc(db, 'users', res.user.uid), {
+            uid: res.user.uid,
+            name: name || email.split('@')[0],
+            email: email,
+            role: role,
+            storeName: role === 'Vendor' ? storeName : '',
+            kycStatus: 'Pending',
+            createdAt: new Date().toISOString()
+          });
+
+          window.showToast("Account Created & Verified!", "success");
+        } else {
+          await signInWithEmailAndPassword(auth, email, password);
+          window.showToast("Verification Successful!", "success");
+        }
+
+        window.closeAuthModal();
+        if (role === 'Vendor') window.switchTab('vendor');
+        else if (role === 'Admin') window.switchTab('admin');
+        else window.switchTab('deals');
+      } catch (err) {
+        window.showToast(err.message.replace("Firebase:", ""), "error");
+      }
+    };
+
+    window.resetToStage1 = function() {
+      document.getElementById('auth-stage-2').classList.add('hidden');
+      document.getElementById('auth-stage-1').classList.remove('hidden');
+      document.getElementById('auth-role-tabs').classList.remove('hidden');
+      document.getElementById('auth-mode-toggle-bar').classList.remove('hidden');
+      document.getElementById('auth-otp-input').value = '';
+    };
+
+    // ================= VENDOR KYC SUBMISSION =================
+    window.submitVendorKYC = async function(e) {
+      e.preventDefault();
+      if (!window.currentUser || window.userRole !== 'Vendor') return;
+
+      const pan = document.getElementById('kyc-pan').value.trim();
+      const fileInput = document.getElementById('kyc-doc-file');
+
+      if (!fileInput.files || !fileInput.files[0]) {
+        return window.showToast("कृपया परिचयपत्र फोटो छान्नुहोस्", "error");
+      }
+
+      const reader = new FileReader();
+      reader.onload = async function(ev) {
+        const photoBase64 = ev.target.result;
+
+        await addDoc(kycCol, {
+          userId: window.currentUser.uid,
+          vendorEmail: window.currentUser.email,
+          vendorName: window.userProfileData?.name || "Vendor",
+          storeName: window.userProfileData?.storeName || "Store",
+          panNumber: pan,
+          documentImage: photoBase64,
+          status: 'Pending',
+          submittedAt: new Date().toLocaleDateString()
+        });
+
+        await updateDoc(doc(db, 'users', window.currentUser.uid), {
+          kycStatus: 'Submitted',
+          panNumber: pan
+        });
+
+        window.showToast("KYC पेश भयो! Admin ले प्रमाणीकरण गर्नेछ।", "success");
+        window.updateRoleSpecificNavigation();
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    };
+
+    // ================= POST DEAL WITH PHOTO =================
+    window.postNewDeal = async function(e) {
+      e.preventDefault();
+      if (window.userRole !== 'Vendor' && window.userRole !== 'Admin') {
+        return window.showToast("अफर पोस्ट गर्न Vendor हुनु आवश्यक छ", "error");
+      }
+
+      const fileInput = document.getElementById('post-photo-file');
+      if (!fileInput.files || !fileInput.files[0]) {
+        return window.showToast("कृपया डिलको फोटो छान्नुहोस्", "error");
+      }
+
+      const title = document.getElementById('post-title').value;
+      const price = document.getElementById('post-price').value;
+      const origPrice = document.getElementById('post-orig-price').value || '';
+      const category = document.getElementById('post-cat').value;
+      const location = document.getElementById('post-loc').value;
+      const shopName = window.userProfileData?.storeName || "Partner Store";
+      const isVerified = window.userProfileData?.kycStatus === 'Approved';
+
+      const reader = new FileReader();
+      reader.onload = async function(ev) {
+        const dealImg = ev.target.result;
+
+        await addDoc(dealsCol, {
+          title,
+          shop: shopName,
+          price,
+          origPrice,
+          category,
+          location,
+          image: dealImg,
+          isVerifiedVendor: isVerified,
+          vendorId: window.currentUser.uid,
+          createdAt: new Date().toISOString()
+        });
+
+        e.target.reset();
+        window.showToast("फोटो सहित नयाँ डिल प्रकाशित भयो!", "success");
+        window.switchTab('deals');
+      };
+      reader.readAsDataURL(fileInput.files[0]);
+    };
+
+    // ================= REALTIME SYNC & RENDERING =================
     function setupPublicDealsSync() {
       onSnapshot(dealsCol, (snap) => {
         const arr = [];
         snap.forEach(d => arr.push({ id: d.id, ...d.data() }));
-        if (arr.length === 0) seedDefaultDeals();
-        else {
-          window.liveDeals = arr;
-          renderDealsFeed();
-        }
+        window.liveDeals = arr;
+        renderDealsFeed();
       });
     }
 
     function setupRealtimeDataSync(user) {
       setupPublicDealsSync();
 
-      // Sync User Vouchers
       onSnapshot(vouchersCol, (snap) => {
         const arr = [];
         snap.forEach(d => {
@@ -505,41 +878,245 @@
         window.liveVouchers = arr;
         renderVouchersList();
       });
+
+      if (window.userRole === 'Admin') {
+        onSnapshot(kycCol, (snap) => {
+          const arr = [];
+          snap.forEach(d => arr.push({ id: d.id, ...d.data() }));
+          window.liveKYCs = arr;
+          renderAdminKYCFeed();
+        });
+      }
     }
 
-    async function seedDefaultDeals() {
-      const demo = [
-        {
-          title: "Special Crispy Chicken 40% Off",
-          shop: "Valley Fast Food",
-          category: "Food",
-          price: "Rs. 450",
-          origPrice: "Rs. 750",
-          location: "New Road, Kathmandu",
-          image: "https://images.unsplash.com/photo-1562967914-608f82629710?w=600&auto=format&fit=crop&q=60",
-          desc: "क्रन्ची चिकेन र फ्राइज कम्बोमा विशेष ४०% छुट।"
-        },
-        {
-          title: "Wireless ANC Earbuds - 30% Off",
-          shop: "Gadget World Nepal",
-          category: "Electronics",
-          price: "Rs. 2,100",
-          origPrice: "Rs. 3,000",
-          location: "Kumaripati, Lalitpur",
-          image: "https://images.unsplash.com/photo-1590658268037-6bf12165a8df?w=600&auto=format&fit=crop&q=60",
-          desc: "एक्टिभ नोइज क्यान्सिलेसन इयरबड्समा भारी छुट।"
-        }
-      ];
-      for (let item of demo) await addDoc(dealsCol, item);
-    }
+    window.renderDealsFeed = function(customList = null) {
+      const feed = document.getElementById('deals-grid');
+      const items = customList || window.liveDeals;
 
-    // Modal & Auth Handlers
-    window.handleTopAuthClick = function() {
-      if (window.currentUser) window.switchTab('profile');
-      else window.openAuthModal('login');
+      if (!items || items.length === 0) {
+        feed.innerHTML = `<div class="p-8 text-center text-gray-400 text-xs font-bold">कुनै पनि डिल भेटिएन।</div>`;
+        return;
+      }
+
+      feed.innerHTML = items.map(d => `
+        <div onclick="openDealModal('${d.id}')" class="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-md transition active:scale-98 cursor-pointer flex flex-col justify-between">
+          <div class="relative">
+            <img src="${d.image}" class="h-44 w-full object-cover">
+            <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">${d.category || 'Offer'}</span>
+          </div>
+          <div class="p-3.5 space-y-1">
+            <p class="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide flex items-center gap-1">
+              ${d.shop} ${d.isVerifiedVendor ? '<i class="fa-solid fa-circle-check text-blue-500 text-xs" title="Verified Blue Tick"></i>' : ''}
+            </p>
+            <h3 class="font-black text-sm text-gray-900 leading-snug">${d.title}</h3>
+            <div class="text-[10px] text-gray-400 flex items-center gap-1 pt-1">
+              <i class="fa-solid fa-location-dot text-rose-500"></i> ${d.location || 'Kathmandu'}
+            </div>
+          </div>
+          <div class="p-3 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between">
+            <div>
+              <span class="text-base font-black text-rose-600">${d.price}</span>
+              ${d.origPrice ? `<span class="text-xs text-gray-400 line-through ml-1">${d.origPrice}</span>` : ''}
+            </div>
+            <span class="bg-rose-500 text-white font-extrabold text-[11px] px-3 py-1.5 rounded-xl shadow-xs">
+              View & Claim
+            </span>
+          </div>
+        </div>
+      `).join('');
     };
 
-    window.openAuthModal = function(mode = 'login') {
+    window.openDealModal = function(id) {
+      const d = window.liveDeals.find(x => x.id === id);
+      if (!d) return;
+
+      document.getElementById('modal-cat').innerText = d.category || 'Deal';
+      document.getElementById('modal-title').innerText = d.title;
+      document.getElementById('modal-shop').innerHTML = `${d.shop} ${d.isVerifiedVendor ? '<i class="fa-solid fa-circle-check text-blue-500 ml-1"></i>' : ''}`;
+      document.getElementById('modal-price').innerText = d.price;
+      document.getElementById('modal-orig-price').innerText = d.origPrice || '';
+      document.getElementById('modal-loc').innerText = d.location || 'Kathmandu';
+      document.getElementById('modal-img').src = d.image;
+
+      document.getElementById('btn-claim-modal').onclick = function() {
+        if (!window.currentUser) {
+          window.closeDealModal();
+          window.openAuthModal('Customer', 'login');
+          window.showToast("भाउचर क्लेम गर्न पहिले लगइन गर्नुहोस्", "error");
+          return;
+        }
+        window.claimDeal(d.id);
+        window.closeDealModal();
+      };
+
+      const m = document.getElementById('deal-modal');
+      const box = document.getElementById('modal-box');
+      m.classList.remove('opacity-0', 'pointer-events-none');
+      box.classList.remove('translate-y-full');
+    };
+
+    window.closeDealModal = function() {
+      const m = document.getElementById('deal-modal');
+      const box = document.getElementById('modal-box');
+      box.classList.add('translate-y-full');
+      setTimeout(() => m.classList.add('opacity-0', 'pointer-events-none'), 200);
+    };
+
+    // ================= QR VOUCHER GENERATION =================
+    window.claimDeal = async function(id) {
+      if (!window.currentUser) return window.openAuthModal('Customer', 'login');
+      const d = window.liveDeals.find(x => x.id === id);
+      if (!d) return;
+
+      const code = `HD-${Math.floor(1000 + Math.random() * 9000)}`;
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=160x160&data=${encodeURIComponent(code)}`;
+
+      await addDoc(vouchersCol, {
+        code,
+        qrUrl,
+        title: d.title,
+        shop: d.shop,
+        price: d.price,
+        userId: window.currentUser.uid,
+        date: new Date().toLocaleDateString(),
+        status: 'Valid'
+      });
+
+      window.showToast(`भाउचर दाबी भयो! QR Code तयार छ: ${code}`, "success");
+      window.switchTab('vouchers');
+    };
+
+    window.renderVouchersList = function() {
+      const c = document.getElementById('vouchers-list');
+      if (!window.currentUser) {
+        c.innerHTML = `
+          <div class="bg-white rounded-3xl p-6 text-center space-y-3 border border-gray-200">
+            <i class="fa-solid fa-ticket text-3xl text-rose-500"></i>
+            <h3 class="text-xs font-black text-gray-900">भाउचरहरू हेर्न लगइन गर्नुहोस्</h3>
+            <button onclick="openAuthModal('Customer', 'login')" class="bg-rose-500 hover:bg-rose-600 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-md">
+              Login to View Vouchers
+            </button>
+          </div>
+        `;
+        return;
+      }
+
+      if (!window.liveVouchers || window.liveVouchers.length === 0) {
+        c.innerHTML = `<div class="p-8 text-center text-gray-400 text-xs font-bold">कुनै पनि दाबी गरिएको भाउचर छैन।</div>`;
+        return;
+      }
+
+      c.innerHTML = window.liveVouchers.map(v => `
+        <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-3">
+          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
+            <div>
+              <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full ${v.status === 'Valid' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-gray-100 text-gray-400'}">${v.status}</span>
+              <h4 class="text-xs font-black text-gray-900 pt-1">${v.title}</h4>
+              <p class="text-[11px] text-gray-500">${v.shop} • <span class="font-black text-rose-600">${v.price}</span></p>
+            </div>
+            <span class="text-[9px] text-gray-400 font-bold">${v.date}</span>
+          </div>
+          <div class="flex items-center justify-between bg-gray-50 p-3 rounded-2xl border border-gray-200/60">
+            <div class="space-y-0.5">
+              <span class="text-[9px] text-gray-400 font-bold uppercase block">Show QR at Store</span>
+              <span class="text-sm font-mono font-black text-gray-900 tracking-wider">${v.code}</span>
+            </div>
+            <div class="w-16 h-16 bg-white p-1 rounded-xl shadow-xs border flex items-center justify-center">
+              <img src="${v.qrUrl}" class="w-full h-full object-contain">
+            </div>
+          </div>
+        </div>
+      `).join('');
+    };
+
+    window.redeemVoucher = async function() {
+      const code = document.getElementById('redeem-code').value.trim().toUpperCase();
+      const v = window.liveVouchers.find(x => x.code === code);
+      if (!v) return window.showToast("अमान्य भाउचर कोड!", "error");
+      if (v.status === 'Redeemed') return window.showToast("भाउचर पहिले नै प्रयोग भइसकेको छ!", "error");
+
+      const docRef = doc(db, 'vouchers', v.id);
+      await updateDoc(docRef, { status: 'Redeemed' });
+      document.getElementById('redeem-code').value = '';
+      window.showToast("भाउचर सफलतापुर्वक Redeem भयो!", "success");
+    };
+
+    // ================= ADMIN KYC & DEALS CONTROLS =================
+    window.renderAdminKYCFeed = function() {
+      const feed = document.getElementById('admin-kyc-list');
+      const pending = window.liveKYCs.filter(k => k.status === 'Pending');
+
+      if (pending.length === 0) {
+        feed.innerHTML = `<div class="text-[11px] text-gray-400">कुनै पनि KYC बाँकी छैन।</div>`;
+        return;
+      }
+
+      feed.innerHTML = pending.map(k => `
+        <div class="p-3 bg-gray-50 rounded-2xl border border-gray-200 space-y-2">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="text-xs font-black text-gray-900">${k.storeName}</p>
+              <p class="text-[10px] text-gray-500">Owner: ${k.vendorName} (${k.vendorEmail})</p>
+              <p class="text-[10px] font-mono text-indigo-600 font-bold">PAN: ${k.panNumber}</p>
+            </div>
+            <img src="${k.documentImage}" class="w-14 h-14 object-cover rounded-xl border border-gray-200">
+          </div>
+          <div class="flex gap-2 pt-1 border-t border-gray-200">
+            <button onclick="approveKYC('${k.id}', '${k.userId}')" class="flex-1 bg-blue-600 text-white font-extrabold py-1.5 rounded-xl text-[11px] flex items-center justify-center gap-1">
+              <i class="fa-solid fa-check"></i> Approve (Blue Tick)
+            </button>
+            <button onclick="rejectKYC('${k.id}', '${k.userId}')" class="flex-1 bg-red-100 text-red-600 font-bold py-1.5 rounded-xl text-[11px]">
+              Reject
+            </button>
+          </div>
+        </div>
+      `).join('');
+    };
+
+    window.approveKYC = async function(kycId, userId) {
+      if (window.userRole !== 'Admin') return;
+      await updateDoc(doc(db, 'kyc_requests', kycId), { status: 'Approved' });
+      await updateDoc(doc(db, 'users', userId), { kycStatus: 'Approved' });
+      window.showToast("Vendor KYC Approved! Blue Tick Granted.", "success");
+    };
+
+    window.rejectKYC = async function(kycId, userId) {
+      if (window.userRole !== 'Admin') return;
+      await updateDoc(doc(db, 'kyc_requests', kycId), { status: 'Rejected' });
+      await updateDoc(doc(db, 'users', userId), { kycStatus: 'Rejected' });
+      window.showToast("Vendor KYC Rejected", "info");
+    };
+
+    window.renderAdminFeed = function() {
+      const feed = document.getElementById('admin-deals-list');
+      feed.innerHTML = window.liveDeals.map(d => `
+        <div class="p-2.5 bg-gray-50 rounded-2xl flex items-center justify-between border border-gray-200">
+          <div class="truncate max-w-[200px]">
+            <div class="text-xs font-bold truncate">${d.title}</div>
+            <div class="text-[10px] text-gray-400">${d.shop}</div>
+          </div>
+          <button onclick="deleteDeal('${d.id}')" class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-bold px-2.5 py-1 rounded-xl active:scale-95 transition">
+            Delete
+          </button>
+        </div>
+      `).join('');
+    };
+
+    window.deleteDeal = async function(id) {
+      if (window.userRole !== 'Admin') return window.showToast("अनधिकृत कार्य!", "error");
+      await deleteDoc(doc(db, 'deals', id));
+      window.showToast("डिल सफलतापूर्वक हटाइयो", "info");
+    };
+
+    // ================= GENERAL UI HELPERS =================
+    window.handleTopAuthClick = function() {
+      if (window.currentUser) window.switchTab('profile');
+      else window.openAuthModal('Customer', 'login');
+    };
+
+    window.openAuthModal = function(role = 'Customer', mode = 'login') {
+      window.resetToStage1();
+      window.selectAuthRole(role);
       window.setAuthMode(mode);
       const modal = document.getElementById('auth-modal');
       const box = document.getElementById('auth-modal-box');
@@ -554,105 +1131,10 @@
       setTimeout(() => modal.classList.add('opacity-0', 'pointer-events-none'), 150);
     };
 
-    window.setAuthMode = function(mode) {
-      window.authMode = mode;
-      const title = document.getElementById('auth-modal-title');
-      const sub = document.getElementById('auth-modal-sub');
-      const nameContainer = document.getElementById('auth-name-container');
-      const btn = document.getElementById('auth-submit-btn');
-      const tabLogin = document.getElementById('auth-tab-login');
-      const tabSignup = document.getElementById('auth-tab-signup');
-
-      if (mode === 'signup') {
-        title.innerText = "Create Hamro Deal Account";
-        sub.innerText = "नयाँ अकाउन्ट बनाएर निःशुल्क भाउचर दाबी गर्नुहोस्।";
-        nameContainer.classList.remove('hidden');
-        btn.innerText = "Create Account";
-        tabSignup.className = "flex-1 py-2 rounded-xl bg-white shadow-2xs text-gray-900 text-center font-bold";
-        tabLogin.className = "flex-1 py-2 rounded-xl text-gray-500 text-center font-bold";
-      } else {
-        title.innerText = "Login to Hamro Deal";
-        sub.innerText = "तपाईंको इमेल र पासवर्ड राखेर लगइन गर्नुहोस्।";
-        nameContainer.classList.add('hidden');
-        btn.innerText = "Sign In";
-        tabLogin.className = "flex-1 py-2 rounded-xl bg-white shadow-2xs text-gray-900 text-center font-bold";
-        tabSignup.className = "flex-1 py-2 rounded-xl text-gray-500 text-center font-bold";
-      }
-    };
-
-    window.handleAuthSubmit = async function(e) {
-      e.preventDefault();
-      const email = document.getElementById('auth-email').value;
-      const password = document.getElementById('auth-password').value;
-      const name = document.getElementById('auth-name').value;
-
-      try {
-        if (window.authMode === 'signup') {
-          const res = await createUserWithEmailAndPassword(auth, email, password);
-          if (name && res.user) await updateProfile(res.user, { displayName: name });
-          window.showToast("Account Created & Logged In!", "success");
-        } else {
-          await signInWithEmailAndPassword(auth, email, password);
-          window.showToast("Welcome Back!", "success");
-        }
-        window.closeAuthModal();
-      } catch (err) {
-        window.showToast(err.message.replace("Firebase:", ""), "error");
-      }
-    };
-
-    window.handleLogout = async function() {
-      await signOut(auth);
-      window.showToast("Logged out successfully", "info");
-      window.toggleDrawer();
-      window.switchTab('deals');
-    };
-
-    function renderProfileScreen(user) {
-      const card = document.getElementById('profile-card');
-      if (user) {
-        const name = user.displayName || "Valued Customer";
-        card.innerHTML = `
-          <div class="w-16 h-16 rounded-full bg-rose-500 text-white font-black text-2xl flex items-center justify-center mx-auto shadow-md">
-            ${name.charAt(0).toUpperCase()}
-          </div>
-          <div>
-            <h3 class="text-base font-black text-gray-900">${name}</h3>
-            <p class="text-xs text-gray-500 font-medium">${user.email}</p>
-          </div>
-          <div class="flex justify-center gap-6 pt-3 border-t border-gray-100">
-            <div>
-              <span class="text-base font-black text-rose-500">${window.liveVouchers.length}</span>
-              <p class="text-[10px] text-gray-400 font-bold">Claimed Vouchers</p>
-            </div>
-          </div>
-          <button onclick="handleLogout()" class="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-2.5 rounded-xl text-xs border border-red-200 transition">
-            Logout Account
-          </button>
-        `;
-      } else {
-        card.innerHTML = `
-          <div class="w-16 h-16 rounded-full bg-gray-200 text-gray-500 font-black text-2xl flex items-center justify-center mx-auto">
-            <i class="fa-solid fa-user-slash text-xl"></i>
-          </div>
-          <div>
-            <h3 class="text-base font-black text-gray-900">Guest Visitor</h3>
-            <p class="text-xs text-gray-400">तपाईं लगइन हुनुभएको छैन।</p>
-          </div>
-          <button onclick="openAuthModal('login')" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-3 rounded-2xl text-xs shadow-md transition">
-            Login or Register Now
-          </button>
-        `;
-      }
-    }
-
-    // UI Navigation & Deals Render
     window.switchTab = function(tab) {
-      const tabs = ['deals', 'vouchers', 'explore', 'profile', 'vendor', 'admin'];
-      tabs.forEach(t => {
+      ['deals', 'vouchers', 'explore', 'profile', 'vendor', 'admin'].forEach(t => {
         const sec = document.getElementById(`tab-${t}`);
         if (sec) sec.classList.add('hidden');
-
         const btn = document.getElementById(`tab-btn-${t}`);
         if (btn) btn.classList.remove('tab-active');
       });
@@ -665,7 +1147,10 @@
 
       if (tab === 'deals') renderDealsFeed();
       if (tab === 'vouchers') renderVouchersList();
-      if (tab === 'admin') renderAdminFeed();
+      if (tab === 'admin') {
+        renderAdminFeed();
+        renderAdminKYCFeed();
+      }
     };
 
     window.toggleDrawer = function() {
@@ -687,47 +1172,55 @@
       window.switchTab(tab);
     };
 
+    window.handleLogout = async function() {
+      await signOut(auth);
+      window.showToast("सफलतापूर्वक Logout भयो", "info");
+      window.toggleDrawer();
+      window.switchTab('deals');
+    };
+
+    function renderProfileScreen(user) {
+      const card = document.getElementById('profile-card');
+      if (user) {
+        const name = (window.userProfileData && window.userProfileData.name) || user.displayName || "Valued User";
+        const isVerified = window.userProfileData?.kycStatus === 'Approved';
+        card.innerHTML = `
+          <div class="w-16 h-16 rounded-full ${window.userRole === 'Admin' ? 'bg-red-600' : (window.userRole === 'Vendor' ? 'bg-indigo-600' : 'bg-rose-500')} text-white font-black text-2xl flex items-center justify-center mx-auto shadow-md">
+            ${name.charAt(0).toUpperCase()}
+          </div>
+          <div>
+            <h3 class="text-base font-black text-gray-900 flex items-center justify-center gap-1">${name} ${isVerified ? '<i class="fa-solid fa-circle-check text-blue-500 text-xs"></i>' : ''}</h3>
+            <p class="text-xs text-gray-500 font-medium">${user.email}</p>
+            <span class="inline-block mt-1 text-[10px] font-extrabold px-2.5 py-0.5 rounded-full ${window.userRole === 'Admin' ? 'bg-red-100 text-red-600' : (window.userRole === 'Vendor' ? 'bg-indigo-100 text-indigo-600' : 'bg-rose-100 text-rose-600')}">
+              ${window.userRole} ${window.userProfileData?.storeName ? `(${window.userProfileData.storeName})` : ''}
+            </span>
+          </div>
+          <button onclick="handleLogout()" class="w-full bg-red-50 hover:bg-red-100 text-red-600 font-bold py-2.5 rounded-xl text-xs border border-red-200 transition mt-2">
+            Logout Account
+          </button>
+        `;
+      } else {
+        card.innerHTML = `
+          <div class="w-16 h-16 rounded-full bg-gray-200 text-gray-500 font-black text-2xl flex items-center justify-center mx-auto">
+            <i class="fa-solid fa-user-slash text-xl"></i>
+          </div>
+          <div>
+            <h3 class="text-base font-black text-gray-900">Guest Visitor</h3>
+            <p class="text-xs text-gray-400">तपाईं अहिले लगइन हुनुहुन्न।</p>
+          </div>
+          <button onclick="openAuthModal('Customer', 'login')" class="w-full bg-rose-500 hover:bg-rose-600 text-white font-extrabold py-3 rounded-2xl text-xs shadow-md transition">
+            Login or Register Account
+          </button>
+        `;
+      }
+    }
+
     window.showToast = function(msg, type = 'info') {
       const t = document.getElementById('toast');
       const bg = type === 'success' ? 'bg-emerald-600' : (type === 'error' ? 'bg-red-600' : 'bg-gray-900');
       t.className = `fixed top-16 left-1/2 -translate-x-1/2 z-50 ${bg} text-white text-xs font-bold px-4 py-2.5 rounded-2xl shadow-xl transition-all duration-300 opacity-100 flex items-center gap-2`;
       t.innerHTML = `<i class="fa-solid fa-circle-info text-sm"></i> <span>${msg}</span>`;
       setTimeout(() => t.classList.remove('opacity-100'), 3000);
-    };
-
-    window.renderDealsFeed = function(customList = null) {
-      const feed = document.getElementById('deals-grid');
-      const items = customList || window.liveDeals;
-
-      if (!items || items.length === 0) {
-        feed.innerHTML = `<div class="p-8 text-center text-gray-400 text-xs font-bold">कुनै पनि डिल भेटिएन।</div>`;
-        return;
-      }
-
-      feed.innerHTML = items.map(d => `
-        <div onclick="openDealModal('${d.id}')" class="bg-white rounded-3xl border border-gray-200/80 overflow-hidden shadow-xs hover:shadow-md transition active:scale-98 cursor-pointer flex flex-col justify-between">
-          <div class="relative">
-            <img src="${d.image}" class="h-44 w-full object-cover">
-            <span class="absolute top-3 left-3 bg-black/60 backdrop-blur-md text-white text-[9px] font-extrabold px-2.5 py-1 rounded-full uppercase tracking-wider">${d.category || 'Offer'}</span>
-          </div>
-          <div class="p-3.5 space-y-1">
-            <p class="text-[11px] font-extrabold text-gray-400 uppercase tracking-wide">${d.shop}</p>
-            <h3 class="font-black text-sm text-gray-900 leading-snug">${d.title}</h3>
-            <div class="text-[10px] text-gray-400 flex items-center gap-1 pt-1">
-              <i class="fa-solid fa-location-dot text-rose-500"></i> ${d.location || 'Kathmandu'}
-            </div>
-          </div>
-          <div class="p-3 border-t border-gray-100 bg-gray-50/50 flex items-center justify-between">
-            <div>
-              <span class="text-base font-black text-rose-600">${d.price}</span>
-              ${d.origPrice ? `<span class="text-xs text-gray-400 line-through ml-1">${d.origPrice}</span>` : ''}
-            </div>
-            <span class="bg-rose-500 text-white font-extrabold text-[11px] px-3 py-1.5 rounded-xl shadow-xs">
-              View & Claim
-            </span>
-          </div>
-        </div>
-      `).join('');
     };
 
     window.setCategory = function(cat) {
@@ -749,173 +1242,9 @@
       window.renderDealsFeed(filtered);
     };
 
-    window.openDealModal = function(id) {
-      const d = window.liveDeals.find(x => x.id === id);
-      if (!d) return;
-
-      document.getElementById('modal-cat').innerText = d.category || 'Deal';
-      document.getElementById('modal-title').innerText = d.title;
-      document.getElementById('modal-shop').innerText = d.shop;
-      document.getElementById('modal-price').innerText = d.price;
-      document.getElementById('modal-orig-price').innerText = d.origPrice || '';
-      document.getElementById('modal-loc').innerText = d.location || 'Kathmandu';
-      document.getElementById('modal-desc').innerText = d.desc || 'Special discount voucher for Hamro Deal customers.';
-      document.getElementById('modal-img').src = d.image;
-
-      document.getElementById('btn-claim-modal').onclick = function() {
-        if (!window.currentUser) {
-          window.closeDealModal();
-          window.openAuthModal('login');
-          window.showToast("कृपया भाउचर क्लेम गर्न लगइन गर्नुहोस्", "error");
-          return;
-        }
-        window.claimDeal(d.id);
-        window.closeDealModal();
-      };
-
-      const m = document.getElementById('deal-modal');
-      const box = document.getElementById('modal-box');
-      m.classList.remove('opacity-0', 'pointer-events-none');
-      box.classList.remove('translate-y-full');
-    };
-
-    window.closeDealModal = function() {
-      const m = document.getElementById('deal-modal');
-      const box = document.getElementById('modal-box');
-      box.classList.add('translate-y-full');
-      setTimeout(() => m.classList.add('opacity-0', 'pointer-events-none'), 200);
-    };
-
-    window.claimDeal = async function(id) {
-      if (!window.currentUser) return window.openAuthModal('login');
-      const d = window.liveDeals.find(x => x.id === id);
-      if (!d) return;
-
-      const code = `HD-${Math.floor(1000 + Math.random() * 9000)}`;
-      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=${encodeURIComponent(code)}`;
-
-      await addDoc(vouchersCol, {
-        code,
-        qrUrl,
-        title: d.title,
-        shop: d.shop,
-        price: d.price,
-        userId: window.currentUser.uid,
-        date: new Date().toLocaleDateString(),
-        status: 'Valid'
-      });
-
-      window.showToast(`भाउचर दाबी भयो: ${code}`, "success");
-      window.switchTab('vouchers');
-    };
-
-    window.renderVouchersList = function() {
-      const c = document.getElementById('vouchers-list');
-
-      if (!window.currentUser) {
-        c.innerHTML = `
-          <div class="bg-white rounded-3xl p-6 text-center space-y-3 border border-gray-200">
-            <i class="fa-solid fa-ticket text-3xl text-rose-500"></i>
-            <h3 class="text-xs font-black text-gray-900">भाउचरहरू हेर्न लगइन गर्नुहोस्</h3>
-            <p class="text-[11px] text-gray-400">तपाईंले दाबी गर्नुभएका भाउचरहरू यहाँ सुरक्षित रहन्छन्।</p>
-            <button onclick="openAuthModal('login')" class="bg-rose-500 hover:bg-rose-600 text-white font-extrabold px-4 py-2 rounded-xl text-xs shadow-md">
-              Login to View Vouchers
-            </button>
-          </div>
-        `;
-        return;
-      }
-
-      if (!window.liveVouchers || window.liveVouchers.length === 0) {
-        c.innerHTML = `<div class="p-8 text-center text-gray-400 text-xs font-bold">तपाईंसँग कुनै पनि दाबी गरिएको भाउचर छैन।</div>`;
-        return;
-      }
-
-      c.innerHTML = window.liveVouchers.map(v => `
-        <div class="bg-white rounded-3xl p-4 border border-gray-200 shadow-sm space-y-3">
-          <div class="flex items-center justify-between border-b border-gray-100 pb-2">
-            <div>
-              <span class="text-[9px] font-extrabold px-2 py-0.5 rounded-full ${v.status === 'Valid' ? 'bg-emerald-50 text-emerald-600 border border-emerald-200' : 'bg-gray-100 text-gray-400'}">${v.status}</span>
-              <h4 class="text-xs font-black text-gray-900 pt-1">${v.title}</h4>
-              <p class="text-[11px] text-gray-500">${v.shop} • <span class="font-black text-rose-600">${v.price}</span></p>
-            </div>
-            <span class="text-[9px] text-gray-400 font-bold">${v.date}</span>
-          </div>
-
-          <div class="flex items-center justify-between bg-gray-50 p-3 rounded-2xl border border-gray-200/60">
-            <div class="space-y-0.5">
-              <span class="text-[9px] text-gray-400 font-bold uppercase block">Show QR at Store</span>
-              <span class="text-sm font-mono font-black text-gray-900 tracking-wider">${v.code}</span>
-            </div>
-            <div class="w-16 h-16 bg-white p-1 rounded-xl shadow-xs border flex items-center justify-center">
-              <img src="${v.qrUrl}" class="w-full h-full object-contain">
-            </div>
-          </div>
-        </div>
-      `).join('');
-    };
-
-    window.postNewDeal = async function(e) {
-      e.preventDefault();
-      if (!window.currentUser) {
-        window.openAuthModal('login');
-        return window.showToast("अफर पोस्ट गर्न कृपया लगइन गर्नुहोस्", "error");
-      }
-
-      const item = {
-        title: document.getElementById('post-title').value,
-        shop: document.getElementById('post-shop').value,
-        price: document.getElementById('post-price').value,
-        origPrice: document.getElementById('post-orig-price').value || '',
-        category: document.getElementById('post-cat').value,
-        location: document.getElementById('post-loc').value,
-        image: "https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&auto=format&fit=crop&q=60",
-        desc: "Special offer deal"
-      };
-
-      await addDoc(dealsCol, item);
-      e.target.reset();
-      window.showToast("नयाँ अफर प्रकाशित भयो!", "success");
-      window.switchTab('deals');
-    };
-
-    window.redeemVoucher = async function() {
-      const code = document.getElementById('redeem-code').value.trim().toUpperCase();
-      const v = window.liveVouchers.find(x => x.code === code);
-      if (!v) return window.showToast("अमान्य भाउचर कोड!", "error");
-      if (v.status === 'Redeemed') return window.showToast("भाउचर पहिले नै प्रयोग भइसकेको छ!", "error");
-
-      const docRef = doc(db, 'vouchers', v.id);
-      await updateDoc(docRef, { status: 'Redeemed' });
-      document.getElementById('redeem-code').value = '';
-      window.showToast("भाउचर सफलतापुर्वक Redeem भयो!", "success");
-    };
-
-    window.renderAdminFeed = function() {
-      const feed = document.getElementById('admin-deals-list');
-      feed.innerHTML = window.liveDeals.map(d => `
-        <div class="p-2.5 bg-gray-50 rounded-2xl flex items-center justify-between border border-gray-200">
-          <div class="truncate max-w-[200px]">
-            <div class="text-xs font-bold truncate">${d.title}</div>
-            <div class="text-[10px] text-gray-400">${d.shop}</div>
-          </div>
-          <button onclick="deleteDeal('${d.id}')" class="bg-red-50 text-red-600 border border-red-200 text-[10px] font-bold px-2.5 py-1 rounded-xl">
-            Delete
-          </button>
-        </div>
-      `).join('');
-    };
-
-    window.deleteDeal = async function(id) {
-      const docRef = doc(db, 'deals', id);
-      await deleteDoc(docRef);
-      window.showToast("डिल हटाइयो", "info");
-    };
-
     window.scanGPS = function() {
       window.showToast("Locating nearby deals...", "info");
     };
   </script>
 </body>
 </html>
-```
